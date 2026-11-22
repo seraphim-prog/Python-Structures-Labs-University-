@@ -1,0 +1,17 @@
+{
+  "timestamp_utc": "2026-11-22T15:08:32.196986+00:00",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "implementation": "CPython",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "machine": "x86_64",
+  "sizes": [
+    100,
+    1000,
+    10000
+  ],
+  "repeats": 5,
+  "search_target": "n - 1 (present, last)",
+  "unique_input": "[i // 2 for i in range(n)]; n/2 unique values",
+  "timer": "timeit default_timer (perf_counter); default GC behaviour",
+  "measurement": "setup excluded; mean/min/max per operation; no output inside timer"
+}
