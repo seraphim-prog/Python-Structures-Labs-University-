@@ -1,0 +1,2 @@
+-r django_app/requirements.txt
+-r flask_app/requirements.txt

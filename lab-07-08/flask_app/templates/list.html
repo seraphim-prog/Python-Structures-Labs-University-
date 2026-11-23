@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Майстер-класи · Практикум{% endblock %}
+{% block content %}
+<h1>Майстер-класи</h1>
+<p class="lead muted">Перегляньте програму й подайте заявку на заняття.</p>
+<div class="grid">
+    {% for workshop, count in workshops %}
+    <article class="card">
+        <div class="chips">{% for topic in workshop.topics %}<span class="chip">{{ topic.name }}</span>{% endfor %}</div>
+        <h2>{{ workshop.title }}</h2>
+        <p class="muted">{{ workshop.starts_on.strftime('%d.%m.%Y') }} · {{ workshop.duration_minutes }} хв · {{ workshop.room }}</p>
+        <p class="muted">Заявок: {{ count }}</p>
+        <a class="card-link" href="{{ url_for('web.workshop_detail', slug=workshop.slug) }}">Деталі та запис →</a>
+    </article>
+    {% else %}
+    <p class="muted">Опубліковані заняття з’являться тут.</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'workshops/base.html' %}
+{% block title %}{{ workshop.title }} · Практикум{% endblock %}
+{% block content %}
+<div class="detail-grid">
+    <section>
+        <a href="{% url 'workshop_list' %}">← До програми</a>
+        <h1>{{ workshop.title }}</h1>
+        <p class="muted">{{ workshop.starts_on|date:"d.m.Y" }} · {{ workshop.duration_minutes }} хв · {{ workshop.room }}</p>
+        <div class="chips">{% for topic in workshop.topics.all %}<span class="chip">{{ topic.name }}</span>{% endfor %}</div>
+        <p>Заявок: {{ workshop.enrollment_count }}</p>
+    </section>
+    <section class="card">
+        <h2>Заявка на заняття</h2>
+        {% for message in messages %}<p class="notice" role="status">{{ message }}</p>{% endfor %}
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {% for field in form %}
+                {{ field.label_tag }}{{ field }}{{ field.errors }}
+            {% endfor %}
+            <button type="submit">Подати заявку</button>
+        </form>
+    </section>
+</div>
+{% endblock %}
