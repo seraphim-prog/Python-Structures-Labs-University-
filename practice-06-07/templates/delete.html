@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Підтвердження видалення · Блог практикуму{% endblock %}
+{% block content %}
+<section class="surface narrow">
+    <h1>Підтвердити видалення</h1>
+    <p>Видалити публікацію <strong>«{{ post.title }}»</strong>?</p>
+    <form class="actions" method="post">
+        <input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+        <button class="danger" type="submit">Так, видалити</button>
+        <a href="{{ url_for('blog.post_detail', post_id=post.id) }}">Скасувати</a>
+    </form>
+</section>
+{% endblock %}

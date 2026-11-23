@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} · Блог практикуму{% endblock %}
+{% block content %}
+<div class="lead">
+    <h1>{{ title }}</h1>
+    <a class="button" href="{{ url_for('blog.post_create') }}">Нова публікація</a>
+</div>
+{% if query is defined %}
+<form class="search" action="{{ url_for('blog.search') }}" method="get">
+    <div><label for="q">Запит</label><input id="q" name="q" value="{{ query }}"></div>
+    <button type="submit">Знайти</button>
+</form>
+{% endif %}
+<div class="grid">
+    {% for entry in posts %}
+    <article class="surface post-card">
+        <p class="muted">{{ entry.created_at[:10] }} · <a href="{{ url_for('blog.user_profile', username=entry.author) }}">{{ entry.author }}</a></p>
+        <h2><a href="{{ url_for('blog.post_detail', post_id=entry.id) }}">{{ entry.title }}</a></h2>
+        <p>{{ entry.content | truncate(145) }}</p>
+    </article>
+    {% else %}
+    <p>Публікацій за цим запитом немає.</p>
+    {% endfor %}
+</div>
+{% if page is defined %}
+<nav class="pagination" aria-label="Сторінки публікацій">
+    {% if page > 1 %}
+    <a href="{{ url_for('blog.post_list', page=page - 1, per_page=per_page) }}">← Попередня</a>
+    {% endif %}
+    <span>Сторінка {{ page }} з {{ pages }}</span>
+    {% if page < pages %}
+    <a href="{{ url_for('blog.post_list', page=page + 1, per_page=per_page) }}">Наступна →</a>
+    {% endif %}
+</nav>
+{% endif %}
+{% endblock %}

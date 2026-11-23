@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Сесія і кошик · Блог практикуму{% endblock %}
+{% block content %}
+<h1>Сесія і кошик</h1>
+{% set token = csrf_token() %}
+<div class="grid">
+    <section class="surface">
+        <h2>Уподобання</h2>
+        <p>Тема <strong>{{ request.cookies.get('theme', 'light') }}</strong>
+            · Мова <strong>{{ request.cookies.get('language', 'uk') }}</strong></p>
+        <div class="actions">
+            {% for theme, label in [('light', 'Світла'), ('dark', 'Темна')] %}
+            <form method="post" action="{{ url_for('account.set_theme', theme=theme) }}">
+                <input name="csrf_token" type="hidden" value="{{ token }}">
+                <button type="submit">{{ label }}</button>
+            </form>
+            {% endfor %}
+            {% for lang in ['uk', 'en'] %}
+            <form method="post" action="{{ url_for('account.set_language', lang=lang) }}">
+                <input name="csrf_token" type="hidden" value="{{ token }}">
+                <button type="submit">{{ lang }}</button>
+            </form>
+            {% endfor %}
+        </div>
+        <a href="{{ url_for('account.preferences') }}">Переглянути JSON уподобань</a>
+    </section>
+    <section class="surface">
+        <h2>Демонстраційний вхід</h2>
+        {% if session.get('username') %}
+        <p>Ви увійшли як <strong>{{ session['username'] }}</strong>.</p>
+        <form class="actions" method="post" action="{{ url_for('account.logout') }}">
+            <input name="csrf_token" type="hidden" value="{{ token }}">
+            <button type="submit">Вийти</button>
+            <a href="{{ url_for('account.profile') }}">Профіль JSON</a>
+        </form>
+        {% else %}
+        <form method="post" action="{{ url_for('account.login') }}">
+            <input name="csrf_token" type="hidden" value="{{ token }}">
+            <div class="field"><label for="username">Ім’я</label><input id="username" name="username" maxlength="60" required></div>
+            <button type="submit">Увійти</button>
+        </form>
+        {% endif %}
+    </section>
+    <section class="surface">
+        <h2>Кошик</h2>
+        <ul class="product-list">
+            {% for id, (name, price) in products.items() %}
+            <li>
+                <span>{{ name }} · {{ price }} грн{% if cart.get(id|string) %} · {{ cart[id|string] }} шт.{% endif %}</span>
+                <form method="post" action="{{ url_for('account.add_to_cart', product_id=id) }}">
+                    <input name="csrf_token" type="hidden" value="{{ token }}">
+                    <button type="submit">Додати</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+        <form class="actions" method="post" action="{{ url_for('account.clear_cart') }}">
+            <input name="csrf_token" type="hidden" value="{{ token }}">
+            <button type="submit">Очистити кошик</button>
+            <a href="{{ url_for('account.view_cart') }}">Кошик JSON</a>
+        </form>
+    </section>
+</div>
+{% endblock %}

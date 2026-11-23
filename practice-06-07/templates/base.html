@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Блог практикуму{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='site.css') }}">
+</head>
+<body data-theme="{{ request.cookies.get('theme', 'light') }}">
+    <header>
+        <div class="wrap bar">
+            <a class="brand" href="{{ url_for('blog.index') }}">Блог практикуму</a>
+            <nav aria-label="Основна навігація">
+                <a href="{{ url_for('blog.post_list') }}">Публікації</a>
+                <a href="{{ url_for('blog.search') }}">Пошук</a>
+                <a href="{{ url_for('account.login') }}">Сесія і кошик</a>
+            </nav>
+        </div>
+    </header>
+    <main class="wrap">
+        {% for message in get_flashed_messages() %}<p class="notice" role="status">{{ message }}</p>{% endfor %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

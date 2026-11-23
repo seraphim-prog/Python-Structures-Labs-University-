@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="start surface">
+    <h1>Блог практикуму</h1>
+    <p>Публікації про Python, HTML-форми та роботу вебзастосунків.</p>
+    <div class="actions">
+        <a class="button" href="{{ url_for('blog.post_list') }}">Переглянути публікації</a>
+        <a href="{{ url_for('blog.post_create') }}">Нова публікація</a>
+    </div>
+</section>
+<section class="grid sections">
+    <div class="surface">
+        <h2>Архів</h2>
+        <a href="{{ url_for('blog.archive', year=2026, month=11) }}">Листопад 2026</a>
+    </div>
+    <div class="surface">
+        <h2>JSON API</h2>
+        <div class="actions">
+            <a href="{{ url_for('items.get_items') }}">Товари</a>
+            <a href="{{ url_for('students.get_students') }}">Студенти</a>
+            <a href="{{ url_for('students.students_stats') }}">Статистика</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

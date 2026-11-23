@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} · Блог практикуму{% endblock %}
+{% block content %}
+<article class="surface narrow">
+    <a href="{{ url_for('blog.post_list') }}">← До публікацій</a>
+    <h1 class="detail-title">{{ post.title }}</h1>
+    <p class="muted"><a href="{{ url_for('blog.user_profile', username=post.author) }}">{{ post.author }}</a> · {{ post.created_at[:10] }}</p>
+    <p class="post-text">{{ post.content }}</p>
+    <div class="actions">
+        <a class="button" href="{{ url_for('blog.post_edit', post_id=post.id) }}">Редагувати</a>
+        <a class="danger-link" href="{{ url_for('blog.post_delete', post_id=post.id) }}">Видалити</a>
+    </div>
+</article>
+{% endblock %}

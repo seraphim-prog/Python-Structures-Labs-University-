@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{ "Редагування" if editing else "Нова публікація" }} · Блог практикуму{% endblock %}
+{% block content %}
+<section class="surface narrow">
+    <h1>{{ "Редагування публікації" if editing else "Нова публікація" }}</h1>
+    <form method="post" novalidate>
+        <input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+        {% for name, (label, limit) in fields.items() %}
+        <div class="field">
+            <label for="{{ name }}">{{ label }}</label>
+            {% set invalid = name in errors %}
+            {% if name == "content" %}
+            <textarea id="{{ name }}" name="{{ name }}" rows="5" maxlength="{{ limit }}" required
+                      {% if invalid %}aria-invalid="true" aria-describedby="{{ name }}-error"{% endif %}>{{ values.get(name, "") }}</textarea>
+            {% else %}
+            <input id="{{ name }}" name="{{ name }}" value="{{ values.get(name, '') }}" maxlength="{{ limit }}" required
+                   {% if invalid %}aria-invalid="true" aria-describedby="{{ name }}-error"{% endif %}>
+            {% endif %}
+            {% if invalid %}<p id="{{ name }}-error" class="error" role="alert">{{ errors[name] }}</p>{% endif %}
+        </div>
+        {% endfor %}
+        <div class="actions">
+            <button type="submit">{{ "Зберегти зміни" if editing else "Створити публікацію" }}</button>
+            <a href="{{ cancel_url }}">Скасувати</a>
+        </div>
+    </form>
+</section>
+{% endblock %}
