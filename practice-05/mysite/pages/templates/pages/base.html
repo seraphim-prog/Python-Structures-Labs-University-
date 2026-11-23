@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'pages/style.css' %}">
+    <title>{% block title %}Django · Практична робота №5{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <div class="bar">
+            <a class="brand" href="{% url 'pages:index' %}">Django</a>
+            <nav aria-label="Навігація">
+                <a href="{% url 'pages:index' %}">Головна</a>
+                <a href="{% url 'pages:about' %}">Про проєкт</a>
+                <a href="{% url 'pages:contact' %}">Контакт</a>
+            </nav>
+        </div>
+    </header>
+    <main class="panel">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Вебзастосунок на Flask</h1>
+<p>Практична робота №5. Застосунок створює фабрика <code>create_app()</code>.</p>
+<dl>
+    <dt>Інформація</dt><dd><a href="{{ url_for('pages.about') }}">Переглянути опис застосунку</a></dd>
+    <dt>JSON</dt><dd><a href="{{ url_for('pages.api_info') }}">Відкрити /api/info</a></dd>
+    <dt>Параметр шляху</dt><dd><a href="{{ url_for('pages.greet', name='Сєрафім') }}">Перевірити /greet/Сєрафім</a></dd>
+    <dt>Параметр запиту</dt><dd><a href="{{ url_for('pages.greet') }}?name=Сєрафім">Перевірити /greet?name=Сєрафім</a></dd>
+</dl>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Привітання · Flask{% endblock %}
+{% block content %}
+<h1>Привітання</h1>
+<p class="result">Вітаю, {{ name }}!</p>
+<form method="get" action="{{ url_for('pages.greet') }}">
+    <label for="name">Ім’я</label>
+    <div class="controls">
+        <input id="name" name="name" autocomplete="given-name">
+        <button>Привітатися</button>
+    </div>
+</form>
+{% endblock %}

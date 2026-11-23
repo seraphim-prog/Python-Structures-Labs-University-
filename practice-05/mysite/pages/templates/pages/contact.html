@@ -1,0 +1,17 @@
+{% extends "pages/base.html" %}
+{% block title %}Контакт · Django{% endblock %}
+{% block content %}
+<h1>Контакт</h1>
+{% if name %}
+    <p class="result">Вітаю, {{ name }}!</p>
+{% else %}
+    <p>Введи ім’я, щоб отримати привітання.</p>
+{% endif %}
+<form method="get" action="{% url 'pages:contact' %}">
+    <label for="name">Ім’я</label>
+    <div class="controls">
+        <input id="name" name="name" value="{{ name }}" autocomplete="given-name">
+        <button>Привітатися</button>
+    </div>
+</form>
+{% endblock %}

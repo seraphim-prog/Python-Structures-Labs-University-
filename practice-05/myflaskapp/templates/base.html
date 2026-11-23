@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}Flask · Практична робота №5{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <div class="bar">
+            <a class="brand" href="{{ url_for('pages.index') }}">Flask</a>
+            <nav aria-label="Навігація">
+                <a href="{{ url_for('pages.index') }}">Головна</a>
+                <a href="{{ url_for('pages.about') }}">Про застосунок</a>
+                <a href="{{ url_for('pages.api_info') }}">API</a>
+                <a href="{{ url_for('pages.greet') }}">Привітання</a>
+            </nav>
+        </div>
+    </header>
+    <main class="panel">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

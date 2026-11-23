@@ -1,0 +1,11 @@
+{% extends "pages/base.html" %}
+{% block content %}
+<h1>Вебпроєкт на Django</h1>
+<p>Практична робота №5 з ініціалізації та конфігурації вебпроєктів.</p>
+<ul>
+    <li>Додаток <code>pages</code> реєструється в <code>INSTALLED_APPS</code>.</li>
+    <li>Кореневий <code>urls.py</code> підключає маршрути через <code>include()</code>.</li>
+    <li>Сторінка контакту читає параметр <code>name</code> з URL.</li>
+</ul>
+<a class="button" href="{% url 'pages:contact' %}?name=Сєрафім">Перевірити привітання</a>
+{% endblock %}
