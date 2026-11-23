@@ -1,0 +1,10 @@
+<article class="workshop-card">
+    <p class="track">{{ workshop.track }}</p>
+    <h2>{{ workshop.title }}</h2>
+    <p class="description">{{ workshop.summary|truncatewords:22 }}</p>
+    <p class="workshop-meta">
+        <time datetime="{{ workshop.day|date:'Y-m-d' }}">{{ workshop.date_label }}</time>
+        · {{ workshop.start }} · {{ workshop.minutes }} хв
+    </p>
+    <a class="card-link" href="{% url 'apply' %}?workshop={{ workshop.key }}">Записатися <span aria-hidden="true">→</span></a>
+</article>

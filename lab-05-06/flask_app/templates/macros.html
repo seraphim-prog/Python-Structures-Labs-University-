@@ -1,0 +1,36 @@
+{% macro workshop_card(workshop) %}
+<article class="workshop-card">
+    <p class="track">{{ workshop.track }}</p>
+    <h2>{{ workshop.title }}</h2>
+    <p class="description">{{ workshop.summary }}</p>
+    <p class="workshop-meta">
+        <time datetime="{{ workshop.day.isoformat() }}">{{ workshop.date_label }}</time>
+        · {{ workshop.start }} · {{ workshop.minutes }} хв
+    </p>
+    <a class="card-link" href="{{ url_for('apply', workshop=workshop.key) }}">Записатися <span aria-hidden="true">→</span></a>
+</article>
+{% endmacro %}
+
+{% macro form_field(field) %}
+    {% set descriptions = [] %}
+    {% if field.description %}{% set descriptions = descriptions + [field.id ~ '_helptext'] %}{% endif %}
+    {% if field.errors %}{% set descriptions = descriptions + [field.id ~ '_error'] %}{% endif %}
+    <div class="field{% if field.errors %} has-error{% endif %}">
+        {{ field.label }}
+        {% if field.errors %}
+            {{ field(aria_invalid="true", aria_describedby=descriptions|join(" ")) }}
+        {% elif descriptions %}
+            {{ field(aria_describedby=descriptions|join(" ")) }}
+        {% else %}
+            {{ field() }}
+        {% endif %}
+        {% if field.description %}
+            <div class="field-hint" id="{{ field.id }}_helptext">{{ field.description }}</div>
+        {% endif %}
+        {% if field.errors %}
+            <ul class="errorlist" id="{{ field.id }}_error">
+                {% for error in field.errors %}<li>{{ error }}</li>{% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{% endmacro %}

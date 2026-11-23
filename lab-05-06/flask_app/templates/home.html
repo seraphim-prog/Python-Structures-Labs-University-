@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }} · Практикум{% endblock %}
+{% block content %}
+<section class="hero">
+    <div class="hero-copy">
+        <p class="eyebrow">Онлайн · українською</p>
+        <h1>{{ page_title }}</h1>
+        <p class="lead">Обирайте заняття з Python, Git або веброзробки. На кожному майстер-класі ви розберете приклад і виконаєте завдання разом із викладачем.</p>
+        <a class="button" href="{{ url_for('program') }}">Переглянути програму <span aria-hidden="true">→</span></a>
+    </div>
+    <section class="agenda" aria-labelledby="agenda-title">
+        <div class="agenda-heading">
+            <h2 id="agenda-title">Розклад</h2>
+            <span class="agenda-count">{{ workshop_count }} заняття</span>
+        </div>
+        {% if workshops %}
+            <ul class="agenda-list">
+                {% for workshop in workshops %}
+                    <li>
+                        <div class="agenda-date">
+                            <time datetime="{{ workshop.day.isoformat() }}">{{ workshop.date_label }}</time>
+                            <span>{{ workshop.start }}</span>
+                        </div>
+                        <a href="{{ url_for('apply', workshop=workshop.key) }}">{{ workshop.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Розклад готується.</p>
+        {% endif %}
+    </section>
+</section>
+{% endblock %}

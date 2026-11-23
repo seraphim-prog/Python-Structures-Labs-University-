@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }} · Практикум{% endblock %}
+{% block content %}
+<section class="response-page">
+    <p class="eyebrow">HTTP {{ status_code }}</p>
+    <h1>{{ page_title }}</h1>
+    <p class="lead">Не вдалося перевірити CSRF-токен. Відкрийте форму знову й повторіть надсилання.</p>
+    <a class="button" href="{{ url_for('apply') }}">Відкрити форму</a>
+</section>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% from "macros.html" import form_field %}
+{% block title %}{{ page_title }} · Практикум{% endblock %}
+{% block content %}
+<div class="apply-layout">
+    <header class="page-intro apply-intro">
+        <h1>{{ page_title }}</h1>
+        <p class="lead">Оберіть заняття, залиште контакт і коротко напишіть, чого хочете навчитися.</p>
+        <a class="text-link" href="{{ url_for('program') }}">← До програми</a>
+    </header>
+    <section class="form-card" aria-label="Форма заявки">
+        {% for category, message in get_flashed_messages(with_categories=true) %}
+            <div class="notice {{ category }}" role="status"><strong>Заявку прийнято</strong><p>{{ message }}</p></div>
+        {% endfor %}
+        {% if form.errors %}
+            <div class="notice error" role="alert">
+                <strong>Перевірте введені дані</strong><p>Виправте поля з повідомленнями про помилки.</p>
+            </div>
+        {% endif %}
+        <form action="{{ url_for('apply') }}" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            {% for field in (form.name, form.email, form.workshop, form.motivation) %}
+                {{ form_field(field) }}
+            {% endfor %}
+            <button class="button" type="submit">Надіслати заявку <span aria-hidden="true">→</span></button>
+        </form>
+    </section>
+</div>
+{% endblock %}

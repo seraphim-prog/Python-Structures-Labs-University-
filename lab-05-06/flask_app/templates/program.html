@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% from "macros.html" import workshop_card %}
+{% block title %}{{ page_title }} · Практикум{% endblock %}
+{% block content %}
+<header class="page-intro">
+    <p class="eyebrow">Онлайн · київський час</p>
+    <h1>{{ page_title }}</h1>
+    <p class="lead">Доступно занять: {{ workshop_count }}. Оберіть тему й перейдіть до заявки.</p>
+</header>
+{% if workshops %}
+    <div class="workshop-grid">
+        {% for workshop in workshops %}
+            {{ workshop_card(workshop) }}
+        {% endfor %}
+    </div>
+{% else %}
+    <p>Наразі немає запланованих майстер-класів.</p>
+{% endif %}
+{% endblock %}
