@@ -1,0 +1,128 @@
+QWidget {
+    font-size: 14px;
+    color: #18283e;
+}
+
+QWidget#workspace,
+QMainWindow,
+QDialog {
+    background-color: #f1f5fa;
+}
+
+QWidget#sessionForm,
+QWidget#journalPanel {
+    background-color: #ffffff;
+    border: 1px solid #d2deea;
+    border-radius: 12px;
+}
+
+QLabel#panelHeading {
+    color: #102f4c;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+QLabel#draftPreview {
+    background-color: #edf5fd;
+    color: #244969;
+    border: 1px solid #d1e2f2;
+    border-radius: 7px;
+    padding: 6px 9px;
+}
+
+QLabel#validationMessage {
+    color: #a42136;
+    font-weight: 600;
+}
+
+QLineEdit {
+    background-color: #ffffff;
+    border: 1px solid #aabdcf;
+    border-radius: 6px;
+    min-height: 27px;
+    padding: 3px 7px;
+    selection-background-color: #235f98;
+}
+
+QLineEdit:focus {
+    border-color: #235f98;
+}
+
+QComboBox,
+QSpinBox {
+    min-height: 34px;
+}
+
+QSpinBox QLineEdit {
+    border: none;
+    min-height: 0;
+    padding: 0;
+}
+
+QPushButton {
+    color: #1e3b56;
+    background-color: #eef3f8;
+    border: 1px solid #b8cbdc;
+    border-radius: 6px;
+    padding: 7px 12px;
+}
+
+QPushButton:hover {
+    background-color: #e1ebf6;
+}
+
+QPushButton:pressed {
+    background-color: #d1e1f1;
+}
+
+QPushButton#addSessionButton {
+    color: #ffffff;
+    background-color: #225f97;
+    border-color: #225f97;
+    font-weight: 600;
+}
+
+QPushButton#addSessionButton:hover {
+    background-color: #174c7d;
+}
+
+QPushButton#addSessionButton:pressed {
+    background-color: #123d65;
+}
+
+QListWidget {
+    background-color: #ffffff;
+    alternate-background-color: #f3f7fc;
+    border: 1px solid #d1deea;
+    border-radius: 6px;
+}
+
+QListWidget::item {
+    padding: 6px 8px;
+}
+
+QProgressBar {
+    color: #102f4c;
+    background-color: #e9f0f7;
+    border: 1px solid #c9d9e8;
+    border-radius: 5px;
+    min-height: 22px;
+    font-weight: 600;
+}
+
+QProgressBar::chunk {
+    background-color: #88bde8;
+    border-radius: 4px;
+}
+
+QMenuBar,
+QToolBar,
+QStatusBar {
+    background-color: #ffffff;
+}
+
+QToolBar {
+    border: 0;
+    spacing: 5px;
+    padding: 4px 9px;
+}
